@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="myProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:sample.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
+
+    <bean id="c1" class="vn.edu.iuh.fit.xmlbased.ex1.Clazz">
+        <property name="id" value="1"/>
+        <property name="name" value="DHKTPM16A"/>
+    </bean>
+    <bean id="c2" class="vn.edu.iuh.fit.xmlbased.ex1.Clazz">
+        <property name="id" value="2"/>
+        <property name="name" value="DHKTPM16B"/>
+    </bean>
+    <bean id="clazz" class="vn.edu.iuh.fit.xmlbased.ex1.Clazz">
+        <property name="id" value="3"/>
+        <property name="name" value="DHKTPM16C"/>
+    </bean>
+    <bean id="s1" class="vn.edu.iuh.fit.xmlbased.ex1.Student">
+        <constructor-arg name="id" value="1"/>
+        <constructor-arg name="name" value="Võ Quốc Thịnh"/>
+        <constructor-arg name="clazz" ref="c1"/>
+    </bean>
+    <bean id="s2" class="vn.edu.iuh.fit.xmlbased.ex1.Student">
+        <property name="id" value="2"/>
+        <property name="name" value="Phạm Thế Kỷ"/>
+        <property name="clazz" ref="c2"/>
+    </bean>
+    <bean id="s3" class="vn.edu.iuh.fit.xmlbased.ex1.Student" autowire="constructor">
+        <property name="id" value="3"/>
+        <property name="name" value="Phạm Thế Kỷ"/>
+    </bean>
+
+
+    <bean id="a1" class="vn.edu.iuh.fit.xmlbased.ex2.Address">
+        <property name="street" value="Phan Van Tri"/>
+        <property name="city" value="Ho Chi Minh City"/>
+        <property name="country" value="Vietnam"/>
+    </bean>
+    <bean id="a2" class="vn.edu.iuh.fit.xmlbased.ex2.Address">
+        <property name="street" value="QL1A"/>
+        <property name="city" value="Phan Thiet"/>
+        <property name="country" value="Vietnam"/>
+    </bean>
+    <bean id="p1" class="vn.edu.iuh.fit.xmlbased.ex2.Person">
+        <property name="name" value="Võ Quốc Thịnh"/>
+        <property name="age" value="21"/>
+        <property name="emails">
+            <list>
+                <value>${email}</value>
+                <value>thinh@gmail.com</value>
+            </list>
+        </property>
+        <property name="addresses">
+            <list>
+                <ref bean="a1"/>
+                <ref bean="a2"/>
+            </list>
+        </property>
+    </bean>
+</beans>
